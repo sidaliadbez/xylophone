@@ -1,8 +1,27 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audio_cache.dart';
 
 void main() {
   runApp(xylophone());
+}
+
+void playnote (int note){
+  final player = AudioCache();
+  player.play('note$note.wav');
+}
+
+Widget buildExpand(Color color ,int note,String  NomNote){
+  return Expanded(
+    child: FlatButton(
+      color: color,
+      onPressed: () {
+        playnote(note) ;
+      },
+      child: Text(NomNote),
+
+    ),
+  );
 }
 class xylophone extends StatelessWidget {
   @override
@@ -11,58 +30,15 @@ class xylophone extends StatelessWidget {
       home: Scaffold(
         body: SafeArea(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  FlatButton(
-                      color: Colors.red[100],
-                  onPressed: () {
-                    final player = AudioCache();
-                    player.play('note1.wav');
-                  },
-                  child: Text("HELLO"),
-
-                ),
-                  FlatButton(
-                      color: Colors.red[200],
-                  onPressed: () {
-                    final player = AudioCache();
-                    player.play('note2.wav');
-                  },
-                  child: Text("HELLO")),
-                  FlatButton(
-                      color: Colors.red[300],
-                      onPressed: () {
-                        final player = AudioCache();
-                        player.play('note3.wav');
-                      },
-                      child: Text("HELLO")),
-                  FlatButton(
-                      color: Colors.red[400],
-                      onPressed: () {
-                        final player = AudioCache();
-                        player.play('note4.wav');
-                      },
-                      child: Text("HELLO")),
-                  FlatButton(
-                      color: Colors.red[500],
-                      onPressed: () {
-                        final player = AudioCache();
-                        player.play('note5.wav');
-                      },
-                      child: Text("HELLO")),
-                  FlatButton(
-                      color: Colors.red[600],
-                      onPressed: () {
-                        final player = AudioCache();
-                        player.play('note6.wav');
-                      },
-                      child: Text("HELLO")),
-                  FlatButton(
-                      color: Colors.red[700],
-                      onPressed: () {
-                        final player = AudioCache();
-                        player.play('note7.wav');
-                      },
-                      child: Text("HELLO"))
+                  buildExpand(Colors.red[100], 1,"Do") ,
+                  buildExpand(Colors.red[200], 2,"Re") ,
+                  buildExpand(Colors.red[300], 3,"Mi") ,
+                  buildExpand(Colors.red[400], 4,"Fa") ,
+                  buildExpand(Colors.red[500], 5,"Sol") ,
+                  buildExpand(Colors.red[600], 6,"La") ,
+                  buildExpand(Colors.red[700], 7,"Si") ,
               ],
             )),
       ),
